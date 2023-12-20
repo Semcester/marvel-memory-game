@@ -1,7 +1,10 @@
+import React from "react";
+
 export interface GameCardProps {
-  id: string;
+  id: number;
   name: string;
   index?: number;
-  status?: boolean;
+  status?: string;
   imageSrc: React.ComponentType<{}>;
+  onCardClick?: () => void;
 }
