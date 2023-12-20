@@ -13,8 +13,6 @@ const GameCard: React.FC<GameCardProps> = ({
     onCardClick(id, name, status);
   };
 
-  useEffect(() => {}, [status]);
-
   return (
     <div
       className={`flex flex-wrap w-150 h-150 bg-white items-center justify-center rounded-lg cursor-pointer`}
@@ -29,7 +27,7 @@ const GameCard: React.FC<GameCardProps> = ({
       />
       <div
         className={`${
-          status === "active"
+          status === "active | success"
             ? "transition-all ease-in-out transform rotateY-180 duration-450 "
             : "transition-all ease-in-out transform rotateY-0 duration-450 "
         }`}

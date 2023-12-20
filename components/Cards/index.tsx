@@ -1,20 +1,36 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { shuffleArray } from "@/utils/arrayUtils";
-import gameData from "@/constants/data";
+//React
+import React, { useEffect, useState } from "react";
 
-import GameCard from "@/components/Cards/Card";
-import Card from "@/components/Cards/Card";
+//Context
 import { useGameContext } from "@/contexts/GameContext";
 
+//Helper & Types
+import { shuffleArray } from "@/utils/arrayUtils";
+import { SelectedCardType } from "@/types/CardType";
+
+//Data
+import gameData from "@/constants/data";
+
+//Component
+import GameCard from "@/components/Cards/Card";
+import Modal from "@/components/Modal/Modal";
+
 const GameCardList: React.FC = () => {
-  const { flips, timer, incrementFlips, incrementScore, decrementScore } =
-    useGameContext();
-  const [cards, setCards] = useState(shuffleArray(gameData));
-  const [currentSelectedCard, setCurrentSelectedCard] = useState<
-    typeof Card | null
-  >(null);
+  const {
+    timer,
+    showModal,
+    incrementFlips,
+    incrementScore,
+    decrementScore,
+    openModal,
+    resetTimer,
+    gameResult,
+  } = useGameContext();
+  const [gameCardList, setCards] = useState(shuffleArray(gameData));
+  const [currentSelectedCard, setCurrentSelectedCard] =
+    useState<SelectedCardType | null>(null);
   const [isTimeoutActive, setIsTimeoutActive] = useState(false);
 
   const handleCardClick = (id: number, name: string, status: string) => {
@@ -43,7 +59,7 @@ const GameCardList: React.FC = () => {
         decrementScore();
         setCards((prevCards) =>
           prevCards.map((card) =>
-            card.id === id || card.id === currentSelectedCard.id
+            card.id === id || card.id === currentSelectedCard
               ? { ...card, status: "active" }
               : card,
           ),
@@ -64,24 +80,34 @@ const GameCardList: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(timer);
     if (timer === 0) {
-      alert("BİTTİİ");
+      openModal();
+      resetTimer();
+      gameCardList.map((card) => (card.status = ""));
+      setCards(shuffleArray(gameCardList));
+      gameResult(false);
     }
   }, [timer]);
 
   useEffect(() => {
     setTimeout(() => {
-      const isGameOver = cards.every((card) => card.status === "success");
+      const isGameOver = gameCardList.every(
+        (card) => card.status === "success",
+      );
       if (isGameOver) {
-        alert("Congratulations! You matched all cards!");
+        openModal();
+        resetTimer();
+        gameCardList.map((card) => (card.status = ""));
+        setCards(shuffleArray(gameCardList));
+        gameResult(true);
       }
     }, 500);
-  }, [cards]);
+  }, [gameCardList]);
 
   return (
     <div className="flex flex-wrap w-900 gap-5 p-4 ">
-      {cards.map((card, index) => (
+      {showModal && <Modal />}
+      {gameCardList.map((card, index) => (
         <GameCard
           key={index}
           {...card}

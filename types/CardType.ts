@@ -8,3 +8,7 @@ export interface GameCardProps {
   imageSrc: React.ComponentType<{}>;
   onCardClick?: () => void;
 }
+export interface SelectedCardType {
+  id: number;
+  name: string;
+}
