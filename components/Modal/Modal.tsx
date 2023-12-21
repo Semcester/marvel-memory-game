@@ -50,8 +50,8 @@ export default function Modal({}) {
           <div className="flex flex-col items-center justify-center ">
             {gameResultContent()}
             <div className="flex gap-20 mt-8 mb-5">
-              <ScoreBadge title={"Score:"} icon={Medal} />
-              <FlipsBadge title={"Flips:"} icon={Flip} />
+              <ScoreBadge title={"Score:"} />
+              <FlipsBadge title={"Flips:"} />
             </div>
             <Restart
               className="relative top-0 cursor-pointer hover:drop-shadow-lg"
