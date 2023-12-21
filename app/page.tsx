@@ -24,7 +24,7 @@ export default function Home() {
         <motion.h1
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 100 }}
-          className="text-4xl text-white mb-5 text-blue-700"
+          className="text-4xl mb-5 text-blue-700"
         >
           Memory Marvel Game
         </motion.h1>

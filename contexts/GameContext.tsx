@@ -29,9 +29,7 @@ interface GameContextValues {
 
 const GameContext = createContext<GameContextValues | null>(null);
 
-const GameProvider: ({ children }: { children: ReactNode }) => {} = ({
-  children,
-}) => {
+const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [score, setScore] = useState(0);
   const [flips, setFlips] = useState(0);
   const [timer, setTimer] = useState(3);
