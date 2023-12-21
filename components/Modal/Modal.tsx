@@ -15,22 +15,23 @@ import { Restart, StarFull, StarsEmpty } from "@/constants/images";
 
 export default function Modal({}) {
   const { restartGame, isWin } = useGameContext();
+
   const gameResultContent = () => {
     if (isWin) {
       return (
-        <>
+        <div className="flex items-center justify-center flex-col">
           <p className=" text-3xl text-amber-900">You Are Champ!</p>
           <StarFull className="" />
-        </>
+        </div>
       );
     } else {
       return (
-        <>
+        <div className="flex items-center justify-center flex-col">
           <p className=" text-3xl text-amber-900">
             Next time, champ! Keep going!
           </p>
           <StarsEmpty className="" />
-        </>
+        </div>
       );
     }
   };

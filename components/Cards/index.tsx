@@ -85,7 +85,7 @@ const GameCardList: React.FC = () => {
       resetTimer();
       gameCardList.map((card) => (card.status = ""));
       setCards(shuffleArray(gameCardList));
-      gameResult(false);
+      // gameResult(false);
     }
   }, [timer]);
 

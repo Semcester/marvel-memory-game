@@ -1,5 +1,10 @@
-import React, { useEffect, useState } from "react";
+//React
+import React from "react";
+
+//Types
 import { GameCardProps } from "@/types/CardType";
+
+//Assets
 import { CardFront } from "@/constants/images";
 
 const GameCard: React.FC<GameCardProps> = ({
@@ -10,7 +15,7 @@ const GameCard: React.FC<GameCardProps> = ({
   onCardClick,
 }) => {
   const handleCardClick = () => {
-    onCardClick(id, name, status);
+    onCardClick?.(id, name, status);
   };
 
   return (
@@ -32,7 +37,7 @@ const GameCard: React.FC<GameCardProps> = ({
             : "transition-all ease-in-out rotate-y-0  duration-450 "
         }`}
       >
-        {React.createElement(imageSrc)}
+        <div>{React.createElement(imageSrc)}</div>
       </div>
     </div>
   );
