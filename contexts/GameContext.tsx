@@ -1,4 +1,6 @@
 "use client";
+
+//React
 import React, {
   createContext,
   useContext,
@@ -6,7 +8,11 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
+
+//Helper
 import { shuffleArray } from "@/utils/arrayUtils";
+
+//Data
 import gameData from "@/constants/data";
 
 interface GameContextValues {
@@ -32,7 +38,7 @@ const GameContext = createContext<GameContextValues | null>(null);
 const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [score, setScore] = useState(0);
   const [flips, setFlips] = useState(0);
-  const [timer, setTimer] = useState(3);
+  const [timer, setTimer] = useState(60);
   const [showModal, setShowModal] = useState(false);
   const [isStart, setIsStart] = useState(false);
   const [cards] = useState(shuffleArray(gameData));

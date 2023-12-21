@@ -1,3 +1,4 @@
+//React
 import React from "react";
 
 type SVGImage = React.FC<React.SVGProps<SVGSVGElement>>;

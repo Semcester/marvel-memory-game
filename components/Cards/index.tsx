@@ -23,7 +23,7 @@ import GameCard from "@/components/Cards/Card";
 import Modal from "@/components/Modal/Modal";
 import ScoreBadge from "@/components/Badge/ScoreBadge";
 import { Flip, Medal, Time } from "@/constants/badges";
-import FlipsBadge from "@/components/Badge/FlipsScore";
+import FlipsBadge from "@/components/Badge/FlipsBadge";
 import TimerBadge from "@/components/Badge/TimerBadge";
 
 const GameCardList: React.FC = () => {
@@ -138,7 +138,7 @@ const GameCardList: React.FC = () => {
           initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 100 }}
         >
-          <ScoreBadge title={"Score:"} icon={Medal} />
+          <ScoreBadge title={"Score:"} />
         </motion.div>
         <motion.div
           initial={{ y: -10, opacity: 0 }}
@@ -146,14 +146,14 @@ const GameCardList: React.FC = () => {
           transition={{ delay: 0.3 }}
         >
           {" "}
-          <FlipsBadge title={"Flips:"} icon={Flip} />
+          <FlipsBadge title={"Flips:"} />
         </motion.div>
         <motion.div
           initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 100 }}
           transition={{ delay: 0.5 }}
         >
-          <TimerBadge title={"Timer:"} icon={Time} />{" "}
+          <TimerBadge title={"Timer:"} />
         </motion.div>
       </div>
       <div className="flex flex-wrap w-900 gap-5 p-4 ">

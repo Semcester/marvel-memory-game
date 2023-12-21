@@ -8,7 +8,7 @@ import { useGameContext } from "@/contexts/GameContext";
 //Components
 import Completed from "@/public/assets/images/completed.png";
 import ScoreBadge from "@/components/Badge/ScoreBadge";
-import FlipsBadge from "@/components/Badge/FlipsScore";
+import FlipsBadge from "@/components/Badge/FlipsBadge";
 
 //Assets
 import { Flip, Medal } from "@/constants/badges";
