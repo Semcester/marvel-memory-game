@@ -95,11 +95,11 @@ const GameCardList: React.FC = () => {
         (card) => card.status === "success",
       );
       if (isGameOver) {
+        gameResult(true);
         openModal();
         resetTimer();
         gameCardList.map((card) => (card.status = ""));
         setCards(shuffleArray(gameCardList));
-        gameResult(true);
       }
     }, 500);
   }, [gameCardList]);

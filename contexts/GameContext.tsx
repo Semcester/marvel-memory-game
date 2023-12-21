@@ -60,7 +60,6 @@ const GameProvider: ({ children }: { children: ReactNode }) => {} = ({
     setFlips(0);
     setTimer(60);
     setShowModal(false);
-    setIsWin(false);
   };
 
   useEffect(() => {

@@ -21,15 +21,15 @@ const GameCard: React.FC<GameCardProps> = ({
       <CardFront
         className={`${
           status === ""
-            ? "transition-all ease-in-out transform rotateY-180 duration-450 absolute z-10"
-            : "transition-all ease-in-out transform rotateY-0 duration-450 absolute -z-10"
+            ? "transition-all ease-in-out  rotate-y-180 duration-450 absolute z-10"
+            : "transition-all ease-in-out  rotate-y-0 duration-450  absolute -z-10"
         }`}
       />
       <div
         className={`${
           status === "active | success"
-            ? "transition-all ease-in-out transform rotateY-180 duration-450 "
-            : "transition-all ease-in-out transform rotateY-0 duration-450 "
+            ? "transition-all ease-in-out rotate-y-180  duration-450 "
+            : "transition-all ease-in-out rotate-y-0  duration-450 "
         }`}
       >
         {React.createElement(imageSrc)}
