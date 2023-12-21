@@ -15,6 +15,7 @@ interface GameContextValues {
   flips: number;
   timer: number;
   isWin: boolean;
+  isStart: boolean;
   showModal: boolean;
   incrementScore: () => void;
   decrementScore: () => void;
@@ -23,6 +24,7 @@ interface GameContextValues {
   openModal: () => void;
   resetTimer: () => void;
   gameResult: (value: boolean) => void;
+  gameStart: () => void;
 }
 
 const GameContext = createContext<GameContextValues | null>(null);
@@ -32,11 +34,15 @@ const GameProvider: ({ children }: { children: ReactNode }) => {} = ({
 }) => {
   const [score, setScore] = useState(0);
   const [flips, setFlips] = useState(0);
-  const [timer, setTimer] = useState(60);
+  const [timer, setTimer] = useState(3);
   const [showModal, setShowModal] = useState(false);
+  const [isStart, setIsStart] = useState(false);
   const [cards] = useState(shuffleArray(gameData));
   const [isWin, setIsWin] = useState(false);
 
+  const gameStart = () => {
+    setIsStart(true);
+  };
   const incrementFlips = () => {
     setFlips((prevFlips) => prevFlips + 1);
   };
@@ -60,15 +66,19 @@ const GameProvider: ({ children }: { children: ReactNode }) => {} = ({
     setFlips(0);
     setTimer(60);
     setShowModal(false);
+    setIsStart(false);
   };
 
   useEffect(() => {
-    const timerInterval = setInterval(() => {
-      setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
-    }, 1000);
-
-    return () => clearInterval(timerInterval);
-  }, []);
+    if (!isStart) {
+      return;
+    } else {
+      const timerInterval = setInterval(() => {
+        setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
+      }, 1000);
+      return () => clearInterval(timerInterval);
+    }
+  }, [isStart]);
 
   return (
     <GameContext.Provider
@@ -79,6 +89,7 @@ const GameProvider: ({ children }: { children: ReactNode }) => {} = ({
         showModal,
         cards,
         isWin,
+        isStart,
         incrementScore,
         incrementFlips,
         decrementScore,
@@ -86,6 +97,7 @@ const GameProvider: ({ children }: { children: ReactNode }) => {} = ({
         openModal,
         resetTimer,
         gameResult,
+        gameStart,
       }}
     >
       {children}

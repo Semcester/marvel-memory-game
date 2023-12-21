@@ -7,6 +7,8 @@ import { GameCardProps } from "@/types/CardType";
 //Assets
 import { CardFront } from "@/constants/images";
 
+import { motion } from "framer-motion";
+
 const GameCard: React.FC<GameCardProps> = ({
   id,
   name,
@@ -19,7 +21,10 @@ const GameCard: React.FC<GameCardProps> = ({
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 100 }}
+      transition={{ delay: 0.7 }}
       className={`flex flex-wrap w-150 h-150 bg-white items-center justify-center rounded-lg cursor-pointer`}
       onClick={handleCardClick}
     >
@@ -30,6 +35,7 @@ const GameCard: React.FC<GameCardProps> = ({
             : "transition-all ease-in-out  rotate-y-0 duration-450  absolute -z-10"
         }`}
       />
+
       <div
         className={`${
           status === "active | success"
@@ -39,7 +45,7 @@ const GameCard: React.FC<GameCardProps> = ({
       >
         <div>{React.createElement(imageSrc)}</div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,23 +1,34 @@
 "use client";
-import Cards from "@/components/Cards";
-import ScoreBadge from "@/components/Badge/ScoreBadge";
 
-import { Medal, Flip, Time } from "@/constants/badges";
+//Context
 import GameProvider from "@/contexts/GameContext";
-import FlipsBadge from "@/components/Badge/FlipsScore";
-import TimerBadge from "@/components/Badge/TimerBadge";
+
+//Animation
+import Lottie from "lottie-react";
+import { motion } from "framer-motion";
+import BG from "@/public/assets/animations/BG.json";
+
+//Components
+import Cards from "@/components/Cards";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center gap-24 place-content-center bg-auto bg-bg-cover bg-fit m-auto ">
+    <main className="flex min-h-screen flex-col items-center gap-24 place-content-center bg-auto bg-fit m-auto  ">
+      <Lottie
+        style={{}}
+        animationData={BG}
+        loop={true}
+        className="-z-20 absolute"
+      />
       <div className="flex flex-col  justify-center items-center gap-10">
-        <h1 className="text-4xl text-white mb-10 ">Memory Marvel</h1>
+        <motion.h1
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 100 }}
+          className="text-4xl text-white mb-5 text-blue-700"
+        >
+          Memory Marvel Game
+        </motion.h1>
         <GameProvider>
-          <div className="flex gap-10">
-            <ScoreBadge title={"Score:"} icon={Medal} />
-            <FlipsBadge title={"Flips:"} icon={Flip} />
-            <TimerBadge title={"Timer:"} icon={Time} />
-          </div>
           <Cards />
         </GameProvider>
       </div>

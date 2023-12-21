@@ -13,20 +13,31 @@ import { SelectedCardType } from "@/types/CardType";
 //Data
 import gameData from "@/constants/data";
 
+//Animations
+import Lottie from "lottie-react";
+import Start from "@/public/assets/animations/start.json";
+import { motion } from "framer-motion";
+
 //Component
 import GameCard from "@/components/Cards/Card";
 import Modal from "@/components/Modal/Modal";
+import ScoreBadge from "@/components/Badge/ScoreBadge";
+import { Flip, Medal, Time } from "@/constants/badges";
+import FlipsBadge from "@/components/Badge/FlipsScore";
+import TimerBadge from "@/components/Badge/TimerBadge";
 
 const GameCardList: React.FC = () => {
   const {
     timer,
     showModal,
+    isStart,
     incrementFlips,
     incrementScore,
     decrementScore,
     openModal,
     resetTimer,
     gameResult,
+    gameStart,
   } = useGameContext();
   const [gameCardList, setCards] = useState(shuffleArray(gameData));
   const [currentSelectedCard, setCurrentSelectedCard] =
@@ -85,7 +96,6 @@ const GameCardList: React.FC = () => {
       resetTimer();
       gameCardList.map((card) => (card.status = ""));
       setCards(shuffleArray(gameCardList));
-      // gameResult(false);
     }
   }, [timer]);
 
@@ -104,19 +114,61 @@ const GameCardList: React.FC = () => {
     }, 500);
   }, [gameCardList]);
 
-  return (
-    <div className="flex flex-wrap w-900 gap-5 p-4 ">
-      {showModal && <Modal />}
-      {gameCardList.map((card, index) => (
-        <GameCard
-          key={index}
-          {...card}
-          onCardClick={(id: number, name: string, status: string) =>
-            handleCardClick(id, name, status)
-          }
+  if (!isStart) {
+    return (
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 100 }}
+        transition={{ delay: 0.2 }}
+      >
+        <Lottie
+          animationData={Start}
+          className="cursor-pointer w-72"
+          loop={true}
+          onClick={() => gameStart()}
         />
-      ))}
-    </div>
+      </motion.div>
+    );
+  }
+
+  return (
+    <>
+      <div className="flex gap-10">
+        <motion.div
+          initial={{ y: -10, opacity: 0 }}
+          animate={{ y: 0, opacity: 100 }}
+        >
+          <ScoreBadge title={"Score:"} icon={Medal} />
+        </motion.div>
+        <motion.div
+          initial={{ y: -10, opacity: 0 }}
+          animate={{ y: 0, opacity: 100 }}
+          transition={{ delay: 0.3 }}
+        >
+          {" "}
+          <FlipsBadge title={"Flips:"} icon={Flip} />
+        </motion.div>
+        <motion.div
+          initial={{ y: -10, opacity: 0 }}
+          animate={{ y: 0, opacity: 100 }}
+          transition={{ delay: 0.5 }}
+        >
+          <TimerBadge title={"Timer:"} icon={Time} />{" "}
+        </motion.div>
+      </div>
+      <div className="flex flex-wrap w-900 gap-5 p-4 ">
+        {showModal && <Modal />}
+        {gameCardList.map((card, index) => (
+          <GameCard
+            key={index}
+            {...card}
+            onCardClick={(id: number, name: string, status: string) =>
+              handleCardClick(id, name, status)
+            }
+          />
+        ))}
+      </div>
+    </>
   );
 };
 

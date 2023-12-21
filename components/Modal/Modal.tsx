@@ -1,5 +1,6 @@
 //React
 import Image from "next/image";
+import Confetti from "react-confetti";
 
 //Context
 import { useGameContext } from "@/contexts/GameContext";
@@ -11,7 +12,11 @@ import FlipsBadge from "@/components/Badge/FlipsScore";
 
 //Assets
 import { Flip, Medal } from "@/constants/badges";
-import { Restart, StarFull, StarsEmpty } from "@/constants/images";
+import { Restart, StarsEmpty } from "@/constants/images";
+
+//Animation
+import Lottie from "lottie-react";
+import Win from "@/public/assets/animations/win.json";
 
 export default function Modal({}) {
   const { restartGame, isWin } = useGameContext();
@@ -21,7 +26,7 @@ export default function Modal({}) {
       return (
         <div className="flex items-center justify-center flex-col">
           <p className=" text-3xl text-amber-900">You Are Champ!</p>
-          <StarFull className="" />
+          <Lottie animationData={Win} style={{ width: 100 }} />
         </div>
       );
     } else {
@@ -38,6 +43,7 @@ export default function Modal({}) {
   return (
     <>
       <div className="fixed inset-0 z-50 bg-black opacity-40"></div>
+      {isWin && <Confetti />}
       <div className="fixed inset-0 z-50 flex top-52 justify-center">
         <div className="flex items-center justify-center flex-col gap-10 bg-white max-w-full max-h-96 p-28 rounded-lg shadow-lg">
           <Image className="" src={Completed} alt={"completed"} width={300} />
