@@ -38,7 +38,7 @@ const GameContext = createContext<GameContextValues | null>(null);
 const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [score, setScore] = useState(0);
   const [flips, setFlips] = useState(0);
-  const [timer, setTimer] = useState(60);
+  const [timer, setTimer] = useState(3);
   const [showModal, setShowModal] = useState(false);
   const [isStart, setIsStart] = useState(false);
   const [cards] = useState(shuffleArray(gameData));

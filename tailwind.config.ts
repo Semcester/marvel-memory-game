@@ -20,20 +20,24 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "open-blue": "#DFF3F8",
+      },
       backgroundImage: {
         "bg-cover": "url('../public/assets/images/bg-cover.png')",
         "front-cover": "url('../public/assets/images/card-front.svg')",
       },
       width: {
-        "150": "150px",
-        "900": "900px",
-        "170": "170px",
         "60": "60px",
+        "150": "150px",
+        "170": "170px",
+        "900": "900px",
+        "1200": "1200px",
       },
       height: {
-        "150": "150px",
         "40": "40px",
         "60": "60px",
+        "150": "150px",
       },
     },
   },

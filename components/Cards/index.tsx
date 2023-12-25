@@ -22,7 +22,6 @@ import { motion } from "framer-motion";
 import GameCard from "@/components/Cards/Card";
 import Modal from "@/components/Modal/Modal";
 import ScoreBadge from "@/components/Badge/ScoreBadge";
-import { Flip, Medal, Time } from "@/constants/badges";
 import FlipsBadge from "@/components/Badge/FlipsBadge";
 import TimerBadge from "@/components/Badge/TimerBadge";
 
@@ -156,7 +155,7 @@ const GameCardList: React.FC = () => {
           <TimerBadge title={"Timer:"} />
         </motion.div>
       </div>
-      <div className="flex flex-wrap w-900 gap-5 p-4 ">
+      <div className="flex flex-wrap items-center justify-center lg:w-900 gap-5 p-4 ">
         {showModal && <Modal />}
         {gameCardList.map((card, index) => (
           <GameCard
