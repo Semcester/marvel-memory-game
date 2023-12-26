@@ -16,7 +16,6 @@ import { shuffleArray } from "@/utils/arrayUtils";
 import gameData from "@/constants/data";
 
 interface GameContextValues {
-  cards: Array<number | string | boolean | ReactNode>;
   score: number;
   flips: number;
   timer: number;
@@ -38,7 +37,7 @@ const GameContext = createContext<GameContextValues | null>(null);
 const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [score, setScore] = useState(0);
   const [flips, setFlips] = useState(0);
-  const [timer, setTimer] = useState(3);
+  const [timer, setTimer] = useState(60);
   const [showModal, setShowModal] = useState(false);
   const [isStart, setIsStart] = useState(false);
   const [cards] = useState(shuffleArray(gameData));
@@ -91,7 +90,6 @@ const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         flips,
         timer,
         showModal,
-        cards,
         isWin,
         isStart,
         incrementScore,

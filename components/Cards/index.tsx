@@ -8,10 +8,7 @@ import { useGameContext } from "@/contexts/GameContext";
 
 //Helper & Types
 import { shuffleArray } from "@/utils/arrayUtils";
-import { SelectedCardType } from "@/types/CardType";
-
-//Data
-import gameData from "@/constants/data";
+import { GameCardProps, SelectedCardType } from "@/types/CardType";
 
 //Animations
 import Lottie from "lottie-react";
@@ -24,6 +21,7 @@ import Modal from "@/components/Modal/Modal";
 import ScoreBadge from "@/components/Badge/ScoreBadge";
 import FlipsBadge from "@/components/Badge/FlipsBadge";
 import TimerBadge from "@/components/Badge/TimerBadge";
+import gameData from "@/constants/data";
 
 const GameCardList: React.FC = () => {
   const {
@@ -41,7 +39,7 @@ const GameCardList: React.FC = () => {
   const [gameCardList, setCards] = useState(shuffleArray(gameData));
   const [currentSelectedCard, setCurrentSelectedCard] =
     useState<SelectedCardType | null>(null);
-  const [isTimeoutActive, setIsTimeoutActive] = useState(false);
+  const [isTimeoutActive, setIsTimeoutActive] = useState<Boolean>(false);
 
   const handleCardClick = (id: number, name: string, status: string) => {
     incrementFlips();
@@ -51,37 +49,41 @@ const GameCardList: React.FC = () => {
 
     if (!currentSelectedCard) {
       setCurrentSelectedCard({ id, name });
-      setCards((prevCards) =>
-        prevCards.map((card) =>
-          card.id === id ? { ...card, status: "active" } : card,
-        ),
+      setCards(
+        (prevCards) =>
+          prevCards?.map((card) =>
+            card?.id === id ? { ...card, status: "active" } : card,
+          ) || [],
       );
     } else {
       setIsTimeoutActive(true);
       if (currentSelectedCard.name === name) {
-        setCards((prevCards) =>
-          prevCards.map((card) =>
-            card.name === name ? { ...card, status: "success" } : card,
-          ),
+        setCards(
+          (prevCards) =>
+            prevCards?.map((card) =>
+              card?.name === name ? { ...card, status: "success" } : card,
+            ) || [],
         );
         incrementScore();
       } else {
         decrementScore();
-        setCards((prevCards) =>
-          prevCards.map((card) =>
-            card.id === id || card.id === currentSelectedCard
-              ? { ...card, status: "active" }
-              : card,
-          ),
+        setCards(
+          (prevCards) =>
+            prevCards?.map((card) =>
+              card?.id === id || card?.id === currentSelectedCard
+                ? { ...card, status: "active" }
+                : card,
+            ) || [],
         );
       }
 
       setTimeout(() => {
         setIsTimeoutActive(false);
-        setCards((prevCards) =>
-          prevCards.map((card) =>
-            card.status === "active" ? { ...card, status: "" } : card,
-          ),
+        setCards(
+          (prevCards) =>
+            prevCards?.map((card) =>
+              card?.status === "active" ? { ...card, status: "" } : card,
+            ) || [],
         );
       }, 1000);
 

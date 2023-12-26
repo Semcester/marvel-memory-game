@@ -6,6 +6,15 @@ const nextConfig = {
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
     );
+    config.module.rules.push({
+      test: /\.mp3$/,
+      use: {
+        loader: "file-loader",
+        options: {
+          name: "[path][name].[ext]",
+        },
+      },
+    });
     config.module.rules.push(
       {
         ...fileLoaderRule,

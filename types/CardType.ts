@@ -10,7 +10,9 @@ export interface GameCardProps {
   imageSrc: SVGImage;
   onCardClick?: (id: number, name: string, status: string) => void;
 }
+
 export interface SelectedCardType {
   id: number;
   name: string;
+  status?: string;
 }
